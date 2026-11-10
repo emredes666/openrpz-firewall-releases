@@ -192,3 +192,79 @@ For further guidance, see:
 
 Report bugs using GitHub Issues.
 Never publish passwords, tokens or private config files.
+
+---
+
+## Beta 9 RC4 — End-to-End Installation Test Plan
+
+This section describes the required validation process
+for a fresh OpenRPZ Firewall Beta 9 RC4 installation.
+
+### Phase 1 — Fresh Ubuntu Server 26.04 Installation
+
+- Install Ubuntu Server 26.04 on a dedicated VM or physical server.
+- Assign a static LAN IP address or DHCP reservation.
+- Configure the router as the default gateway.
+- Verify Internet connectivity and DNS resolution.
+- Confirm Python 3.14 and BIND9 availability.
+
+### Phase 2 — OpenRPZ Firewall Beta 9 RC4 Installation
+
+- Download the CPython 3.14 release package from GitHub Releases.
+- Download and verify the matching SHA256 checksum.
+- Extract the release archive.
+- Run the installation script.
+- Verify the CLI using `openrpz status`.
+- Confirm existing DNS installations are not overwritten.
+
+### Phase 3 — BIND9 and Six Feed Sources
+
+- Configure BIND9 to listen on the intended LAN IP.
+- Restrict recursive DNS access to trusted clients.
+- Configure and activate the RPZ policy zone.
+- Configure the six feed sources used by the lab:
+  OISD Big, HaGeZi PRO, HaGeZi TIF Full 1,
+  HaGeZi TIF Full 2, HaGeZi SafeSearch,
+  and HaGeZi DoH/VPN/Tor/Proxy.
+- Download and validate the selected feeds.
+- Apply exclusions and deduplicate domains.
+- Generate and validate the RPZ zone.
+- Publish only after backups and health checks.
+- Verify blocked and allowed domains.
+- Test recovery using a controlled failure.
+
+IMPORTANT: Beta 9 RC4 does not automatically perform
+all of these steps. Manual DNS activation and feed
+configuration are required.
+
+### Phase 4 — Windows DNS and Blockmeter Testing
+
+- Configure the Windows PC to use the Ubuntu OpenRPZ IP
+  as its preferred DNS resolver.
+- Keep the router as the default gateway.
+- Flush the Windows DNS cache.
+- Verify that the default resolver is OpenRPZ.
+- Check blocked domains return NXDOMAIN.
+- Check allowed domains resolve normally.
+- Verify browser Secure DNS / DoH does not bypass OpenRPZ.
+- Run https://blockmeter.io/ and record the results.
+
+### Phase 5 — Documentation and Bug Reporting
+
+- Record installation errors and unexpected DNS responses.
+- Document any manual steps missing from this guide.
+- Verify changes against a fresh installation.
+- Update INSTALL.md, COMMANDS.md and NETWORK_SETUP.md
+  where necessary.
+- Submit reproducible issues through GitHub Issues.
+- Never disclose credentials, private feeds or secrets.
+
+### Validation Status
+
+The CPython 3.14 CLI, package checksum, RPZ configuration
+generation, and isolated DNS blocking have been tested.
+
+A complete fresh Ubuntu installation with automatic
+six-feed activation is not yet verified.
+
+Do not treat this checklist as proof that all phases passed.
