@@ -27,3 +27,8 @@ Never share credentials or private configuration files.
 ## Home network setup
 
 See [NETWORK_SETUP.md](NETWORK_SETUP.md) for router, Ubuntu, Windows DNS and Blockmeter testing instructions.
+
+## Fresh installation guide
+
+See [FRESH_INSTALL.md](FRESH_INSTALL.md) for the
+10-step Ubuntu installation, DNS setup and Windows testing guide.
