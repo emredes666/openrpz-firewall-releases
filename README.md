@@ -23,3 +23,7 @@ The Python bytecode can be reverse-engineered.
 
 Report problems through GitHub Issues.
 Never share credentials or private configuration files.
+
+## Home network setup
+
+See [NETWORK_SETUP.md](NETWORK_SETUP.md) for router, Ubuntu, Windows DNS and Blockmeter testing instructions.
